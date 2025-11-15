@@ -6,9 +6,9 @@ class Tenants(BaseMaster):
     __tablename__="tenants"
 
     id =            Column(Integer,primary_key=True,index=True)
-    first_name =    Column(String,nullable=False)
-    middle_name=    Column(String,nullable=True)
-    last_name=      Column(String,nullable=False)
+    firstname =     Column(String,nullable=False)
+    middlename=     Column(String,nullable=True)
+    lastname=       Column(String,nullable=False)
     gender=         Column(Integer,nullable=False)
     username=       Column(String,nullable=False)
     password=       Column(String,nullable=False)
@@ -17,12 +17,12 @@ class Tenants(BaseMaster):
 
 
 class Billings(BaseMaster):
-    __tablename__="billing"
+    __tablename__="billings"
     trans_id =  Column(Integer,primary_key=True)
     package =   Column(String,nullable=False)
     amount =    Column(Numeric(10,2),nullable=False)
     dot =       Column(DateTime,default=datetime.now())
-    tenat_id=   Column(Integer,ForeignKey("tenants.id"))
+    t_id=       Column(Integer,ForeignKey("tenants.id"))
 
 
 
