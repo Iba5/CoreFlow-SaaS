@@ -7,6 +7,12 @@ from master.model.table import Tenants,Billings
 from master.db.session import session
 
 db=session()
+async def get_dbname(id:int)->Optional[str]:
+    dbname = db.query(Tenants.db_name).filter(Tenants.id==id).first()
+    if not dbname:
+        return None
+    return dbname[0]
+
 
 class MasterRepo(ABC):
     @abstractmethod
@@ -35,7 +41,7 @@ class MasterRepo(ABC):
     @abstractmethod
     def Update_Package(self, details:PackageBill)-> Optional[DisplayHistory]:
         pass
-
+    
 class Tenant_Data(MasterRepo):
     def __init__(self):
         self.db=db
@@ -74,6 +80,7 @@ class Tenant_Data(MasterRepo):
     def Get_All_Tenant(self)->List[DisplayTenant]:
         users = self.db.query(Tenants).all()
         return [DisplayTenant.model_validate(user) for user in users]
+    
 
 class Tenant_Packages(MasterRepo):
     def __init__(self):

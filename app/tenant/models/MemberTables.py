@@ -1,12 +1,13 @@
 from tenant.db.tenant_engine import TenantBase
-from sqlalchemy import Column,Integer,String,Numeric,DateTime,ForeignKey
+from sqlalchemy import Column,Integer,String,Numeric,DateTime,Boolean,ForeignKey
 from datetime import datetime
 
 class Workers(TenantBase):
     __tablename__="workers"
     id          =Column(Integer,primary_key=True)
-    username    =Column(String,nullable=False)
+    username    =Column(String,unique=True,nullable=False)
     password    =Column(String,nullable=False)
+    company     =Column(String,nullable=False)
     firstname   =Column(String,nullable=False)
     middlename  =Column(String,nullable=True)
     lastname    =Column(String,nullable=False)
@@ -23,6 +24,7 @@ class Finances(TenantBase):
     trans_id    =Column(Integer,primary_key=True)
     finances    =Column(String,nullable=False,index=True)
     amount      =Column(Numeric(10,2),nullable=False)
+    expense     =Column(Boolean)
     date        =Column(DateTime,default=datetime.now(),nullable=False)
     user_id     =Column(Integer,ForeignKey("workers.id"))
 
