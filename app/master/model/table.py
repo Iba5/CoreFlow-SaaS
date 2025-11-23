@@ -6,12 +6,12 @@ class Tenants(BaseMaster):
     __tablename__="tenants"
 
     id =            Column(Integer,primary_key=True,index=True)
+    username=       Column(String,unique=True,nullable=False)
+    password=       Column(String,nullable=False)
     firstname =     Column(String,nullable=False)
     middlename=     Column(String,nullable=True)
     lastname=       Column(String,nullable=False)
     gender=         Column(Integer,nullable=False)
-    username=       Column(String,nullable=False)
-    password=       Column(String,nullable=False)
     db_name=        Column(String, nullable=False)
     active=         Column(Boolean,default=True)
 
