@@ -1,6 +1,7 @@
 from sqlalchemy.orm import declarative_base
 from sqlalchemy import Engine, create_engine
 from utils.configs import config
+import importlib
 
 TenantBase = declarative_base()
 db_url = config.TENANT_URL
@@ -8,7 +9,10 @@ engine_cache: dict[str,Engine]={}
 
 def createEng(db_name:str)->Engine:
     if db_name not in engine_cache:
-        from tenant.models.MemberTables import Workers,Finances # type: ignore
+        importlib.import_module("tenant.models.roles")
+        importlib.import_module("tenant.models.transactions_details")
+        importlib.import_module("tenant.models.user_details")
+        importlib.import_module("tenant.models.worker_details")
         engine = create_engine(f"{db_url}{db_name}")
         TenantBase.metadata.create_all(bind=engine)
         engine_cache[db_name]=engine
