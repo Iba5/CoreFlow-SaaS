@@ -1,4 +1,6 @@
-from pydantic import BaseModel
+from pydantic import BaseModel,field_serializer
+from datetime import date
+from typing import Any
 
 class bill(BaseModel):
     PackId:  str
@@ -13,7 +15,12 @@ class displayBill(BaseModel):
     Package:    str
     Duration:   int
     Cost:       float
-    Date:       str
-    Expiry:     str
+    Date:       date
+    Expiry:     date
     Remain:     int
+
+    @field_serializer("Date","Expiry")
+    def to_human(cls,v:date,_info:Any):
+        return v.strftime("%d/%m/%Y")
+
     
