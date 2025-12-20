@@ -1,14 +1,13 @@
-from typing import Optional
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 class Settings(BaseSettings):
-    DB_URL:     Optional[str] = None
-    SECRET:     Optional[str] = None
-    ALGO:       Optional[str] = None
-    TENANT_URL: Optional[str] =None
+    DB_URL:     str
+    SECRET:     str
+    ALGO:       str
+    TENANT_URL: str
     model_config = SettingsConfigDict(env_file=".env", extra="ignore")
     
-config = Settings()
+config = Settings() # type: ignore
 
 # print(config.DB_URL)
 """

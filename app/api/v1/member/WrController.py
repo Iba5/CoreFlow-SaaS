@@ -7,6 +7,7 @@ class WorkersController:
     @work.post("/details/{id}")
     async def AddInfo(self, request:Request):
         pass
+    
     @work.put("/update/details/{id}")
     async def UpdateInfo(self, request:Request):
         pass

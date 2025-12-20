@@ -4,7 +4,6 @@ from starlette.requests import Request
 from starlette.responses import Response
 from sqlalchemy.orm import sessionmaker
 from typing import Callable,Awaitable
-
 from app.master.repos.MasterRepo import get_dbname
 from app.tenant.db.tenant_engine import get_tenant_db
 
