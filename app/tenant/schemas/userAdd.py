@@ -1,4 +1,4 @@
-from pydantic import BaseModel, field_validator
+from pydantic import BaseModel, field_serializer, field_validator
 from typing import Optional
 from datetime import date,datetime
 
@@ -40,15 +40,28 @@ class UpdateUser(BaseModel):
         raise ValueError("Invalid DateFormat: DD/MM/YYYY or DD-MM-YYYY")
 
 class Credentials(BaseModel):
-    Id:         Optional[str|int]
+    Id:         str|int
     username:   str
     password:   str
 
 class UpdateCredentials(BaseModel):
-    Id:     Optional[str|int]
+    Id:     str|int
     oldpwd: str
     newpwd: str
 
 class ResetCredentials(BaseModel):
-    Id:     Optional[str|int]
+    Id:     str|int
     newpwd: str
+
+class UserResponse(BaseModel):
+    id: int
+    username: str
+    firstname: str
+    middlename: str | None
+    lastname: str
+    gender: str | None
+    dob: date
+
+    @field_serializer("dob")
+    def human_dob(self, v: date):
+        return v.strftime("%d/%m/%Y")
