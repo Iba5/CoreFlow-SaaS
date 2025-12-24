@@ -13,7 +13,7 @@ class AuthMiddlware(BaseHTTPMiddleware):
             return await call_next(request)
         auth = request.headers.get("Authorization")
         
-        if not auth or auth.startswith("Bearer "):
+        if not auth or not auth.startswith("Bearer "):
             return JSONResponse({"detail":"missing token"},status_code=401)
         token = auth.split(" ")[1]
         

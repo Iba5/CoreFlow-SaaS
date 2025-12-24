@@ -92,15 +92,11 @@ class RefreshTokens:
         user=db.query(RefreshToken).filter(
             RefreshToken.User_Id==User_id, 
             RefreshToken.Device_id== device_id,
+            RefreshToken.Exp > datetime.now()
             ).first()
         
-        #invalid user
+        #invalid user || Expired Token
         if not user: 
-            return True
-        
-        #expired token
-        exp:datetime=getattr(user,"Exp")
-        if exp<datetime.now():
             return True
         
         # invalid token
