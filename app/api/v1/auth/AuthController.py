@@ -13,14 +13,10 @@ class AuthController:
     @auth.post("/signin")
     async def SignIn(self,userDet:AddUser,userCreds:Credentials,request:Request):
         db=request.state.db
-        password=HashPassword(userCreds.password)
-        user= sec.sign_up(user=user.Id,password=password,db=db)
        
     @auth.post("/login")
     async def login(self, user:Credentials,request:Request):
         db=request.state.db
-        h_pwd=
-        VerifyPassword()
 
     @auth.put("/logout")
     async def logout(self):
@@ -29,7 +25,6 @@ class AuthController:
     @auth.post("/forgot/password")
     async def verify_username(self,user:ResetCredentials,request:Request):
         db=request.state.db
-        password=user.password
         
 
     @auth.post(path="/reset/password")

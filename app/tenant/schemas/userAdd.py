@@ -40,7 +40,7 @@ class UpdateUser(BaseModel):
         raise ValueError("Invalid DateFormat: DD/MM/YYYY or DD-MM-YYYY")
 
 class Credentials(BaseModel):
-    Id:         str|int
+    id:         int
     username:   str
     password:   str
 
